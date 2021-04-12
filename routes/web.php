@@ -30,5 +30,5 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/index-user', IndexUser::class)->name('index-user');
     Route::get('/products/index', IndexProduct::class)->name('index-product');
     Route::get('/products/create', CreateProduct::class)->name('create-product');
-    Route::get('/products/edit/{id}', EditProduct::class)->name('edit-product');
+    Route::get('/products/edit', EditProduct::class)->name('edit-product');
 });

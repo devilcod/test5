@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\User;
 
-use LivewireUI\Modal\ModalComponent;
+use Livewire\Component;
 
-class EditUser extends ModalComponent
+class EditUser extends Component
 {
     public function render()
     {

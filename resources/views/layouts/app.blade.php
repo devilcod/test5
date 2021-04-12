@@ -37,8 +37,6 @@
             </main>
         </div>
     </body>
-    {{-- @stack('modals') --}}
-    @livewire('livewire-ui-modal')
-    @livewireUIScripts
+    @stack('modals')
     @livewireScripts
 </html>

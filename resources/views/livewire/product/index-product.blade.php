@@ -10,16 +10,22 @@
     </x-button>
     <div>
       @if (session()->has('message'))
-          <div class="alert alert-success">
-              {{ session('message') }}
+      <div class="bg-teal-lightest border-t-4 border-teal rounded-b text-teal-darkest px-4 py-3 shadow-md my-2" role="alert">
+        <div class="flex">
+          <svg class="h-6 w-6 text-teal mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg>
+          <div>
+            <p class="font-bold">{{ session('message') }}</p>
+            {{-- <p class="text-sm">Make sure you know how these changes affect you.</p> --}}
           </div>
+        </div>
+      </div>
       @endif
   </div>
         <div class="flex flex-col">
-          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-              <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200">
+          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 bg-red-200">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 ">
+              <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-red-500">
+                <table class="min-w-full divide-y divide-gray-200 bg-green-100">
                   <thead class="bg-gray-50">
                     <tr>
                       <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -65,16 +71,17 @@
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          {{ $product->created_at }}
+                          {{ $product->created_at->diffForHumans() }}
                         </span>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                        {{ $product->updated_at }}
+                        {{ $product->updated_at->diffForHumans() }}
                       </span>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button wire:click="" class="text-indigo-600 hover:text-indigo-900" >Edit</button>
+                        <a href="" class="text-indigo-600 hover:text-indigo-900" >Edit |</a>
+                        <button wire:click="deleteProduct({{ $product->id }})" class="text-indigo-600 hover:text-indigo-900" >Delete</button>
                       </td>
                     </tr>
                     @endforeach
