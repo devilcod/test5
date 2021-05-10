@@ -5,9 +5,8 @@
         </h2>
     </x-slot>
      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <x-button class="mt-5 mb-5">
-        <a href="/products/create" :active="request()->routeIs('index-product')">{{ __('Add') }}</a>
-    </x-button>
+        <a class ="inline-flex items-center px-4 py-2 mt-5 mb-5 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" 
+        href="{{ route('product.create') }}" :active="request()->routeIs('product.create')">{{ __('Add') }}</a>
     <div>
       @if (session()->has('message'))
       <div class="bg-teal-lightest border-t-4 border-teal rounded-b text-teal-darkest px-4 py-3 shadow-md my-2" role="alert">
@@ -80,8 +79,8 @@
                       </span>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="" class="text-indigo-600 hover:text-indigo-900" >Edit |</a>
-                        <button wire:click="deleteProduct({{ $product->id }})" class="text-indigo-600 hover:text-indigo-900" >Delete</button>
+                        <a href="{{ route('product.edit',['product' => $product]) }}" class="text-indigo-600 hover:text-indigo-900" >Edit |</a>
+                        <button wire:click="deleteProduct({{ $product->id }})" wire:loading.attr="disabled" class="text-indigo-600 hover:text-indigo-900" >Delete</button>
                       </td>
                     </tr>
                     @endforeach

@@ -37,6 +37,7 @@
             </main>
         </div>
     </body>
-    @stack('modals')
+    @livewire('livewire-ui-modal')
+    @livewireUIScripts
     @livewireScripts
 </html>

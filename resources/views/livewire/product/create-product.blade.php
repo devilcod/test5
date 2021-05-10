@@ -22,31 +22,46 @@
                     <div class="col-span-6 sm:col-span-3">
                       <label for="first_name" class="block text-sm font-medium text-gray-700">Name</label>
                       <input type="text" wire:model="name"name="first_name" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        @error('name')
+                          <div class="block text-sm font-sm text-red-500">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                       <label for="country" class="block text-sm font-medium text-gray-700">Category</label>
                       <select wire:model="category_id" id="category_id" name="category_id" autocomplete="" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <option value="disabled">&NonBreakingSpace;choose one</option>
+                        <option data-display="Choose One" disabled>&NonBreakingSpace;Choose One</option>
                         @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option @if ($category_id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                       </select>
+                      @error('category_id')
+                      <div class="block text-sm font-sm text-red-500">{{ $message }}</div>
+                    @enderror
                     </div>
                     
                     <div class="col-span-6">
                       <label for="street_address" class="block text-sm font-medium text-gray-700">Description</label>
                       <input type="text" wire:model="description" name="street_address" id="street_address" autocomplete="street-address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      @error('dascription')
+                      <div class="block text-sm font-sm text-red-500">{{ $message }}</div>
+                    @enderror
                     </div>
       
                     <div class="col-span-6 sm:col-span-6 lg:col-span-2">
                       <label for="city" class="block text-sm font-medium text-gray-700">Price</label>
                       <input type="text" wire:model="price" name="city" id="city" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      @error('price')
+                      <div class="block text-sm font-sm text-red-500">{{ $message }}</div>
+                    @enderror
                     </div>
       
                     <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                       <label for="state" class="block text-sm font-medium text-gray-700">Another Example</label>
                       <input type="text" wire:model="photo" name="state" id="state" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      @error('photo')
+                      <div class="block text-sm font-sm text-red-500">{{ $message }}</div>
+                    @enderror
                     </div>
       
                     {{-- <div class="col-span-6 sm:col-span-3 lg:col-span-2">

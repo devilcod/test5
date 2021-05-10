@@ -18,7 +18,7 @@ class CreateProduct extends Component
         'name' => 'required',
         'description' => 'required',
         'category_id' => 'required',
-        'price' => 'required',
+        'price' => 'required|numeric',
         'photo' => 'nullable',
     ];
 
@@ -35,6 +35,6 @@ class CreateProduct extends Component
 
         Product::create($validatedProductData);
         session()->flash('message', 'Product successfully created.');
-        return redirect()->to('/products/index');
+        return redirect()->route('products');
     }
 }
