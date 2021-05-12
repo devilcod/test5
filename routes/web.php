@@ -30,7 +30,5 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/users', IndexUser::class)->name('users');
     Route::get('/products', IndexProduct::class)->name('products');
-    Route::get('/product/create', CreateProduct::class)->name('product.create');
-    Route::get('/product/edit/{product?}', EditProduct::class)->name('product.edit');
     Route::get('/categories', IndexCategory::class)->name('categories');
 });

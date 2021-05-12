@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Product;
 
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use App\Models\Product;
 use App\Models\Category;
 
-class EditProduct extends Component
+class EditProduct extends ModalComponent
 {
 
     public $product;
@@ -16,7 +16,8 @@ class EditProduct extends Component
     public $category_id;
     public $price;
     public $photo;
-    
+    public $listeners = ['categoriesUpdated' => 'refreshCategory'];
+
 
     public function mount(product $product)
     {
@@ -29,8 +30,12 @@ class EditProduct extends Component
         $this->photo = $product->photo;
         }
     }
+    public function refreshCategory()
+    {
+        $categories = Category::latest()->get();
+    }
 
-    public function updateProduct()
+    public function editProduct()
     {
         $validatedProductUpdateData = $this->validate([
             'name' => 'required',
@@ -49,13 +54,24 @@ class EditProduct extends Component
                 'price' => $this->price,
                 'photo' => $this->photo,
             ]);
-            session()->flash('message', 'Product Updated Successfully.');
+            $this->closeModalWithEvents(['productsUpdated',
+            IndexProduct::getName() => 'productsUpdated']);
+            $this->alert('success', 'Updated!', [
+                'position' =>  'top-end', 
+                'timer' =>  '4000', 
+                'toast' =>  true, 
+                'text' =>  '', 
+                'confirmButtonText' =>  'Ok', 
+                'cancelButtonText' =>  'Cancel', 
+                'showCancelButton' =>  false, 
+                'showConfirmButton' =>  false, 
+                ]);
         }
-        return redirect()->route("products");
     }
 
     public function render()
     {
-        return view('livewire.product.edit-product',['categories' => Category::all()]);
+        $categories = Category::latest()->get();
+        return view('livewire.product.edit-product',compact('categories'));
     }
 }

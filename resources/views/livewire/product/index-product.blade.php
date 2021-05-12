@@ -5,26 +5,14 @@
         </h2>
     </x-slot>
      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <a class ="inline-flex items-center px-4 py-2 mt-5 mb-5 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" 
-        href="{{ route('product.create') }}" :active="request()->routeIs('product.create')">{{ __('Add') }}</a>
-    <div>
-      @if (session()->has('message'))
-      <div class="bg-teal-lightest border-t-4 border-teal rounded-b text-teal-darkest px-4 py-3 shadow-md my-2" role="alert">
-        <div class="flex">
-          <svg class="h-6 w-6 text-teal mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg>
-          <div>
-            <p class="font-bold">{{ session('message') }}</p>
-            {{-- <p class="text-sm">Make sure you know how these changes affect you.</p> --}}
-          </div>
-        </div>
-      </div>
-      @endif
+      <x-button wire:click="$emit('openModal', 'product.create-product')" class="mt-5 mb-5">{{ __('Add') }}</x-button> 
+      <div>
   </div>
         <div class="flex flex-col">
-          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 bg-red-200">
+          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 ">
-              <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-red-500">
-                <table class="min-w-full divide-y divide-gray-200 bg-green-100">
+              <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
                       <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -46,11 +34,12 @@
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                      @foreach ($products as $product)
+                      @forelse ($products as $product)
                       <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="flex-shrink-0 h-10 w-10">
-                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                            {{-- <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt=""> --}}
+                            <img class="h-10 w-10 rounded-full" src="{{ url($product->photo) }}">
                           </div>
                           <div class="ml-4">
                             <div class="text-sm font-medium text-gray-900">
@@ -79,11 +68,18 @@
                       </span>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="{{ route('product.edit',['product' => $product]) }}" class="text-indigo-600 hover:text-indigo-900" >Edit |</a>
-                        <button wire:click="deleteProduct({{ $product->id }})" wire:loading.attr="disabled" class="text-indigo-600 hover:text-indigo-900" >Delete</button>
+                        <button wire:click="$emit('openModal', 'product.edit-product', {{ json_encode(["product" => $product->id]) }})" class="text-indigo-600 hover:text-indigo-900" >Edit</button>
+                        <span>|</span>
+                        <button wire:click="$emit('openModal', 'product.delete-product', {{ json_encode(["product" => $product->id]) }})" class="text-indigo-600 hover:text-indigo-900" >Delete</button>
                       </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <td colspan="4">
+                      <span class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-gray-100 text-red-500">
+                      There's No Product Yet
+                    </span>
+                  </td>
+                    @endforelse
         
                     <!-- More items... -->
                   </tbody>

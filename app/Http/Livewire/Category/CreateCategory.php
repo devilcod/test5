@@ -3,13 +3,14 @@
 namespace App\Http\Livewire\Category;
 
 use App\Models\Category;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
+use App\Http\Livewire\Product\CreateProduct;
+use App\Http\Livewire\Product\EditProduct;
 
 class CreateCategory extends ModalComponent
 {
     public $name;
-    public $category_id = 2;
+    public $category_id;
 
     protected $rules = [
     'name' => 'required',
@@ -20,11 +21,26 @@ class CreateCategory extends ModalComponent
     {
         $validatedData = $this->validate();
         Category::create($validatedData);
-        $this->closeModdal();
+        $this->closeModalWithEvents(['categoriesUpdated',
+        IndexCategory::getName() => 'categoriesUpdated',
+        CreateProduct::getName() => 'categoriesUpdated',
+        EditProduct::getName() => 'categoriesUpdated']);
+        $this->alert('success', 'Created!', [
+            'position' =>  'top-end', 
+            'timer' =>  '4000', 
+            'toast' =>  true, 
+            'text' =>  '', 
+            'confirmButtonText' =>  'Ok', 
+            'cancelButtonText' =>  'Cancel', 
+            'showCancelButton' =>  false, 
+            'showConfirmButton' =>  false, 
+      ]);
     }
 
     public function render()
     {
-        return view('livewire.category.create-category');
+        $categories = Category::whereNull('category_id')
+        ->get();
+        return view('livewire.category.create-category',compact('categories'));
     }
 }
