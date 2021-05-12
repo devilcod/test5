@@ -48,7 +48,7 @@ class CreateProduct extends ModalComponent
             'price' => 'required|numeric',
             'photo' => 'nullable|image',
         ]);
-        $photoName = $this->photo->store("photos",'public');
+        $photoName = $this->photo->store('photos','public');
         $validatedProductData['photo'] = $photoName;
         Product::create($validatedProductData);
 
