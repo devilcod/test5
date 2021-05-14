@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\User\IndexUser;
 use App\Http\Livewire\Product\IndexProduct;
-use App\Http\Livewire\Product\CreateProduct;
-use App\Http\Livewire\Product\EditProduct;
 use App\Http\Livewire\Category\IndexCategory;
+use App\Http\Livewire\Order\IndexOrder;
+use App\Http\Livewire\Order\CreateOrder;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,4 +31,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users', IndexUser::class)->name('users');
     Route::get('/products', IndexProduct::class)->name('products');
     Route::get('/categories', IndexCategory::class)->name('categories');
+    Route::get('/orders', IndexOrder::class)->name('orders');
+    Route::get('/order/create', CreateOrder::class)->name('create.order');
 });

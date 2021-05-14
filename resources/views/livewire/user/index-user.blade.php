@@ -5,9 +5,7 @@
       </h2>
   </x-slot>
    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-    <a class="inline-flex items-center px-4 py-2 mt-5 mb-5 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"
-    href=""> {{ __('Add') }}<a>
-      <div class="flex flex-col">
+      <div class="flex flex-col px-4 py-2 mt-5 mb-5">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -25,9 +23,6 @@
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Role
-                    </th>
-                    <th scope="col" class="relative px-6 py-3">
-                      <span class="sr-only">Edit</span>
                     </th>
                   </tr>
                 </thead>
@@ -60,9 +55,6 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       Admin
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button wire:click="" class="text-indigo-600 hover:text-indigo-900" >Edit</button>
                     </td>
                   </tr>
                   @endforeach
