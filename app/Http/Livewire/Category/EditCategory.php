@@ -11,6 +11,7 @@ class EditCategory extends ModalComponent
     public $category_id;
     public $categoryId;
     public $category;
+    public $currentCategory;
 
     protected $rules = [
         'name' => 'required',

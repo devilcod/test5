@@ -70,7 +70,7 @@
                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button wire:click="$emit('openModal', 'product.edit-product', {{ json_encode(["product" => $product->id]) }})" class="text-indigo-600 hover:text-indigo-900" >Edit</button>
                         <span>|</span>
-                        <button wire:click="$emit('openModal', 'product.delete-product', {{ json_encode(["product" => $product->id]) }})" class="text-indigo-600 hover:text-indigo-900" >Delete</button>
+                        <button wire:click="$emit('openModal', 'product.delete-product', {{ json_encode(["product" => $product]) }})" class="text-indigo-600 hover:text-indigo-900" >Delete</button>
                       </td>
                     </tr>
                     @empty

@@ -12,7 +12,7 @@
                 <select wire:model="category_id" class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     <option value="disabled">&NonBreakingSpace;Choose One</option>  
                     @forelse ($categories as $category )
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" {{ $category->id == $currentCategory ? 'selected' : '' }}>{{ $category->name }}</option>
                     @empty
                         <span>Empty</span>
                     @endforelse

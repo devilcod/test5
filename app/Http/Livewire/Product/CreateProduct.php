@@ -34,7 +34,9 @@ class CreateProduct extends ModalComponent
 
     public function render()
     {
-        $categories = Category::latest()->get();
+        $categories = Category::whereNotNull('category_id')
+        ->latest()
+        ->get();
 
         return view('livewire.product.create-product', compact('categories'));
     }

@@ -3,19 +3,24 @@
 namespace App\Http\Livewire\Product;
 
 use LivewireUI\Modal\ModalComponent;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Category;
 
 class EditProduct extends ModalComponent
 {
+    use WithFileUploads;
 
     public $product;
     public $productId;
     public $name;
     public $description;
     public $category_id;
+    public $currentCategory;
     public $price;
     public $photo;
+    public $currentPhoto;
     public $listeners = ['categoriesUpdated' => 'refreshCategory'];
 
 
@@ -24,10 +29,10 @@ class EditProduct extends ModalComponent
         if($product) {
         $this->productId = $product->id;
         $this->name = $product->name;
-        $this->category_id = $product->category->category_id;
+        $this->category_id = $product->category_id;
         $this->description = $product->description;
         $this->price = $product->price;
-        $this->photo = $product->photo;
+        $this->currentPhoto = $product->photo;
         }
     }
     public function refreshCategory()
@@ -47,12 +52,15 @@ class EditProduct extends ModalComponent
         if($this->productId)
         {
             $product = Product::findOrFail($this->productId);
+            Storage::delete("public/$this->currentPhoto");
+            $photoName = $this->photo->store('photos','public');
+            $validatedProductData['photo'] = $photoName;
             $product->update([
                 'name' => $this->name,
                 'description' => $this->description,
                 'category_id' => $this->category_id,
                 'price' => $this->price,
-                'photo' => $this->photo,
+                'photo' => $photoName,
             ]);
             $this->closeModalWithEvents(['productsUpdated',
             IndexProduct::getName() => 'productsUpdated']);

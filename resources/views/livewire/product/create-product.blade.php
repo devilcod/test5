@@ -25,7 +25,7 @@
 
           <x-label for="category_id" :value="__('Select a Category')" />
               <select wire:model="category_id" class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                <option value="disabled">&NonBreakingSpace;Choose One</option>  
+                <option value="">&NonBreakingSpace;Choose One</option>  
                 @forelse ($categories as $category )
                   <option value="{{ $category->id }}">{{ $category->name }}</option>
                   @empty
@@ -36,9 +36,9 @@
 
               <x-label for="name" :value="__('Another Example')" />
               {{-- <x-input wire:model="photo" id="photo" class="block mt-1 w-full" type="text" name="photo" :value="old('photo')" required autofocus /> --}}
-            <div class="block border border-gray-300">
+            <div class="flex box-content h-32 w-32 bg-gray-200 rounded-2xl">
               @if($photo)
-              <img src="{{ $photo->temporaryUrl() }}" class="h-12 w-12 h-full">
+              <img src="{{ $photo->temporaryUrl() }}" class="rounded-2xl">
               @endif
             </div>
             <div
