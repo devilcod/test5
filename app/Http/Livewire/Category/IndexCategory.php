@@ -18,6 +18,6 @@ class IndexCategory extends Component
     public function render()
     {
         $categories = Category::latest()->orderBy('updated_at')->paginate(8);
-        return view('livewire.category.index-category', ['categories' => $categories]);
+        return view('livewire.category.index-category',compact('categories'));
     }
 }

@@ -48,23 +48,40 @@ class CreateProduct extends ModalComponent
             'description' => 'required',
             'category_id' => 'required',
             'price' => 'required|numeric',
-            'photo' => 'nullable|image',
+            'photo' => 'required|image',
         ]);
-        $photoName = $this->photo->store('photos','public');
-        $validatedProductData['photo'] = $photoName;
-        Product::create($validatedProductData);
-
-        $this->closeModalWithEvents(['productsUpdated',
-        IndexProduct::getName() => 'productsUpdated']);
-        $this->alert('success', 'Created!', [
-            'position' =>  'top-end', 
-            'timer' =>  '4000', 
-            'toast' =>  true, 
-            'text' =>  '', 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-      ]);
+        if($this->photo)
+        {
+            $photoName = $this->photo->store('photos','public');
+            $validatedProductData['photo'] = $photoName; 
+        }
+            if($validatedProductData)
+            {
+                Product::create($validatedProductData);
+                $this->closeModalWithEvents(['productsUpdated',
+                IndexProduct::getName() => 'productsUpdated']);
+                $this->alert('success', 'Created!', [
+                    'position' =>  'top-end', 
+                    'timer' =>  '4000', 
+                    'toast' =>  true, 
+                    'text' =>  '', 
+                    'confirmButtonText' =>  'Ok', 
+                    'cancelButtonText' =>  'Cancel', 
+                    'showCancelButton' =>  false, 
+                    'showConfirmButton' =>  false, 
+                ]);
+            }else
+            {
+                $this->alert('error', 'Error!', [
+                    'position' =>  'top-end', 
+                    'timer' =>  '4000', 
+                    'toast' =>  true, 
+                    'text' =>  'Something Went Wrong!!!', 
+                    'confirmButtonText' =>  'Ok', 
+                    'cancelButtonText' =>  'Cancel', 
+                    'showCancelButton' =>  false, 
+                    'showConfirmButton' =>  false, 
+                ]);   
+            }
     }
 }

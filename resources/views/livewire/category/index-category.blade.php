@@ -18,7 +18,7 @@
                       Name
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Created at
+                      Parent
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Updated at
@@ -42,7 +42,12 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        {{ $category->created_at->diffForHumans() }}
+                        
+                        @if (!is_null($category->category_id))
+                          {{ $category->category_id }}
+                        @else
+                          #
+                        @endif
                       </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
