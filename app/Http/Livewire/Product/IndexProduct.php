@@ -15,13 +15,13 @@ class IndexProduct extends Component
 
     public function refreshProductsPage()
     {
-        $products = Product::latest()->paginate(8);
+        $products = Product::latest()->paginate(12);
     }
 
 
     public function render()
     {
-        $products = Product::latest()->paginate(8);
+        $products = Product::latest()->paginate(12);
         return view('livewire.product.index-product', compact('products'));
     }
 

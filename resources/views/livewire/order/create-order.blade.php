@@ -1,74 +1,19 @@
 <div>
     <div class="flex mt-5 ml-5 h-screen fixed">
         <div class="flex grid grid-cols-4 gap-6 w-2/3 h-4/5 overflow-scroll">
+            @forelse ($products as $product)
             <div class="bg-gray-200 rounded-2xl">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
+                <img src="{{ asset('storage/' .$product->photo) }}" alt="" class="rounded-2xl">
                 <div class="px-2 ">
-                    <p class="text-sm">Kentot</p>
-                    <span class="text-sm">Rp 10.000</span>
-                    <x-button class="ml-4 mb-2">Add</x-button>
+                    <p class="text-sm">{{ $product->name }}</p>
+                    <span class="text-sm">{{ $product->price }}</span>
+                    <x-button wire:click.prevent="addToCart({{ $product->id }})" class="ml-4 mb-2">Add</x-button>
                 </div>
             </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
-            <div class="">
-                <img src="{{ asset('contoh1.jpg') }}" alt="" class="rounded-2xl">
-                <p>Kentot</p>
-            </div>
+            @empty
+                <p>There is no product yet</p>
+            @endforelse
+            
         </div>
     <div class="inline-block px-2 ml-5 mr-2 px-4 py-4 bg-red-300 w-1/3 rounded-2xl">
         <div class="">

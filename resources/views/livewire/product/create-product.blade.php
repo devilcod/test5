@@ -27,7 +27,9 @@
               <select wire:model="category_id" id="category_id" name="category_id" class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <option value="">&NonBreakingSpace;Choose One</option>  
                 @forelse ($categories as $category )
-                  <option value="{{ $category->id }}">{{ $category->name }}</option>
+                  <option value="{{ $category->id }}">{{ $category->name }} 
+                  || {{ $category->where('id', $category->category_id)->value('name')}}
+                  </option>
                   @empty
                       <span>Empty</span>
                   @endforelse
@@ -55,7 +57,13 @@
 
               <!-- Progress Bar -->
               <div x-show="isUploading">
-                  <progress max="100" x-bind:value="progress"></progress>
+                  <progress max="100" x-bind:value="progress" class="flex rounded bg-pink-500 shadow-none ">
+                    <div class="relative pt-1">
+                      <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-pink-200">
+                        <div style="width:30%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"></div>
+                      </div>
+                    </div>
+                  </progress>
               </div>
               @error('photo')
               <div class="block text-sm font-sm text-red-500">{{ $message }}</div>
